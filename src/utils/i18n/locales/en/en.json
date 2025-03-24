@@ -1,0 +1,23 @@
+{
+  "loginPage": {
+    "loginForm":{
+      "formLable":"Log in",
+      "emailFieldLable": "Email",
+      "passwordFieldLable": "Password",
+      "submitButton":"Log in",
+      "goToButton":"Go to sign up",
+      "dividerLable":"Don`t have an account"
+    }
+  },
+  "registerPage": {
+    "registerForm":{
+      "formLable":"Sign up",
+      "emailFieldLable": "Email",
+      "passwordFieldLable": "Password",
+      "repeatPasswordFieldLable": "Repeat password",
+      "submitButton":"Sign up",
+      "goToButton":"Go to log in",
+      "dividerLable":"Already signed up"
+    }
+  }
+}

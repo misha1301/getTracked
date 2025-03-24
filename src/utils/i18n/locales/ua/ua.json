@@ -1,0 +1,23 @@
+{
+  "loginPage": {
+    "loginForm":{ 
+      "formLable":"Вхід",
+      "emailFieldLable": "Імейл",
+      "passwordFieldLable": "Пароль",
+      "submitButton":"Увійти",
+      "goToButton":"Перейти до реєстрації",
+      "dividerLable":"Ще немає акаунта"
+    }
+  },
+  "registerPage": {
+    "registerForm":{
+      "formLable":"Реєстрація",
+      "emailFieldLable": "Імейл",
+      "passwordFieldLable": "Пароль",
+      "repeatPasswordFieldLable": "Повторіть пароль",
+      "submitButton":"Зареєструватись",
+      "goToButton":"Перейти до входу",
+      "dividerLable":"Маєте акаунт"
+    }
+  }
+}

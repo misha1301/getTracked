@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+} */
+
+html,
+body,
+#root {
+  min-height: 100dvh;
+  width: 100%;
+}
+
+body {
+  --color-background: #1f2022;
+  --color-foreground: #ffffff;
+  --color-component-background: #181818;
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    --color-background: #1f2023;
+    --color-foreground: #efefef;
+  }
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: Montserrat, sans-serif;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
