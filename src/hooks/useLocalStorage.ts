@@ -1,7 +1,7 @@
 
-import {IStorableItems} from "./useSaveStorage.ts"
+import {IStorableItems} from "./useAutoSave.ts"
 
-const useLocalStorage = (key:string):IStorableItems => {
+const useLocalStorage = <T>(key:string):IStorableItems<T> => {
   const setItem = (value: unknown) => {
     try{
       window.localStorage.setItem(key, JSON.stringify(value));
@@ -10,7 +10,7 @@ const useLocalStorage = (key:string):IStorableItems => {
     }
   }
 
-  const getItem = <T>() => {
+  const getItem = () => {
     try{
      const item = window.localStorage.getItem(key);
      return item? (JSON.parse(item) as T) : undefined;

@@ -3,7 +3,7 @@ import { Box } from '@chakra-ui/react';
 
 type TLoginProps = PropsWithChildren;
 
-const MainRoot: React.FC<TLoginProps> = ({ children }) => {
+const Root: React.FC<TLoginProps> = ({ children }) => {
   return (
     <Box
       w='100%'
@@ -21,7 +21,7 @@ const MainRoot: React.FC<TLoginProps> = ({ children }) => {
   );
 };
 
-const MainContent: React.FC<PropsWithChildren> = ({ children }) => {
+const Content: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <Box
       height='100%'
@@ -38,8 +38,8 @@ const MainContent: React.FC<PropsWithChildren> = ({ children }) => {
   );
 };
 
-const MainDrawer: React.FC<PropsWithChildren> = ({ children }) => {
+const Drawer: React.FC<PropsWithChildren> = ({ children }) => {
   return <Box as='nav' width={"300px"}>{children}</Box>;
 };
 
-export default { Root: MainRoot, Content: MainContent, Drawer: MainDrawer };
+export default { Root, Content, Drawer };
