@@ -5,7 +5,6 @@ import AppLayout from './layouts/AppLayout';
 import UserLayout from './layouts/UserLayout';
 import { Routes, Route } from 'react-router-dom';
 import Runner from './components/table/Runner';
-import Tracker from './components/ui/Tracker';
 
 const LoginPage = lazy(() => import('./pages/Login'));
 const RegisterPage = lazy(() => import('./pages/Register'));
@@ -25,7 +24,7 @@ function App() {
           <Route path='runner' element={<UserLayout />}>
             <Route path=':runnerId' element={<UserLayout />}>
               <Route index element={<Runner />} />
-              <Route path='tracker/:trackerId' element={<Tracker />} />
+              <Route path='tracker/:trackerId' element={<>tracker</>} />
             </Route>
           </Route>
           <Route path='*' element={<>404 page</>} />
