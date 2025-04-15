@@ -1,5 +1,5 @@
 import React from "react";
-
+import {cn} from "@lib/utils";
 
 
 function Table({ className, ...props }: React.ComponentProps<"table">) {
@@ -12,7 +12,7 @@ function Table({ className, ...props }: React.ComponentProps<"table">) {
         >
             <table
                 data-slot="table"
-                className={className}
+                className={cn("w-full caption-bottom text-sm", className)}
                 {...props}
             />
         </div>
@@ -23,7 +23,7 @@ function TableHeader({ className, ...props }: React.ComponentProps<"thead">) {
     return (
         <thead
             data-slot="table-header"
-            className={className}
+            className={cn("[&_tr:last-child]:border-0", className)}
             {...props}
         />
     )
