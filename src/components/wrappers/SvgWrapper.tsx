@@ -1,24 +1,16 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { jsx, css } from '@emotion/react';
-import { Box } from '@chakra-ui/react';
+import { cn } from "@/lib/utils"
 
-import { PropsWithChildren } from 'react';
-
-type SvgWrapperProps = PropsWithChildren & {
+interface ISvgWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
   height?: string | undefined;
 };
 
-function SvgWrapper({ children, height, ...props }: SvgWrapperProps) {
-  const wrapperStyle = css({
-    height: height ? height : 'auto',
-    width: 'fit-content',
-  });
+const  SvgWrapper: React.FC<ISvgWrapperProps> = (props) => {
+  const { children, height, className, ...rest } = props;
 
   return (
-    <Box css={wrapperStyle} {...props}>
+    <div className={cn(`w-fit ${height ? "h-["+height+"px]" : "h-auto"}`, className)} {...rest}>
       {children}
-    </Box>
+    </div>
   );
 }
 
