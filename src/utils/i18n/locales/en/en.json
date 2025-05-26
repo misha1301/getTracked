@@ -19,5 +19,12 @@
       "goToButton":"Go to log in",
       "dividerLable":"Already signed up"
     }
+  },
+  "menu": {
+    "items": {
+      "runner": "Runner",
+      "rules": "Rules",
+      "settings": "Settings"
+    }
   }
 }

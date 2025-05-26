@@ -1,12 +1,6 @@
-// import React from 'react';
-// import { Tabs } from '@chakra-ui/react';
-/** @jsxRuntime classic */
-/** @jsx jsx */
+
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { jsx, css } from '@emotion/react';
-import { Button, Input, Stack, Field, Text, InputProps, ButtonProps } from '@chakra-ui/react';
-import { PasswordInput, PasswordInputProps } from '@/components/ui/password-input';
 import BasicBlock from './BasicBlock';
 import DividerLine from './DividerLine';
 

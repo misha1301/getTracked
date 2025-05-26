@@ -1,25 +1,75 @@
-import React, { PropsWithChildren } from 'react';
+import React from 'react';
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
+import { Root as ScrollAreaRoot } from '@radix-ui/react-scroll-area';
+import { cn } from '@/lib/utils.ts';
 
-type TLoginProps = PropsWithChildren;
-
-const MainRoot: React.FC<TLoginProps> = ({ children }) => {
+function MainRoot({ children, className, ...props }: React.ComponentProps<'div'>) {
   return (
-    <div className="w-full h-full bg-[#181818] overflow-hidden rounded-t-[20px] flex grow border-solid border-t-[0.5px] border-[#2F2F2F]">
+    <div
+      className={cn(
+        'w-full h-full bg-(--color-component-background) overflow-hidden rounded-t-[20px] flex grow border-solid border-t-(length:--border-width) border-(--border-color)',
+        className,
+      )}
+      {...props}
+    >
       {children}
     </div>
   );
-};
+}
 
-const MainContent: React.FC<PropsWithChildren> = ({ children }) => {
+function Main({ children, className, ...props }: React.ComponentProps<'main'>) {
   return (
-    <main className="h-full grow overflow-y-scroll flex flex-col scroll-smooth p-[24px] bg-[#181818]"  >
+    <main className={cn('h-full grow flex flex-col', className)} {...props}>
       {children}
     </main>
   );
-};
+}
 
-const MainDrawer: React.FC<PropsWithChildren> = ({ children }) => {
-  return <nav className={"w-[300px]"}>{children}</nav>;
-};
+function MainContent({
+  children,
+  className,
+  ...props
+}: React.ComponentProps<typeof ScrollAreaRoot>) {
+  return (
+    <ScrollArea
+      className={cn(
+        'min-h-0 w-full grow flex flex-col scroll-smooth bg-(--color-component-background)',
+        className,
+      )}
+      {...props}
+    >
+      {children}
+      <ScrollBar orientation='vertical' className='w-[7px] md:w-[10px] mr-[2px] md:mr-[5px]'></ScrollBar>
+    </ScrollArea>
+  );
+}
 
-export default { Root: MainRoot, Content: MainContent, Drawer: MainDrawer };
+function MainHeader({ children, className, ...props }: React.ComponentProps<'header'>) {
+  return (
+    <header
+      className={cn(
+        'flex shrink-0 items-center w-full h-[48px] px-[10px] md:px-[25px] border-b-(length:--border-width) sm:border-none border-(--border-color) border-solid',
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </header>
+  );
+}
+
+function MainSidebar({ children, className, ...props }: React.ComponentProps<'nav'>) {
+  return (
+    <nav className={cn(className)} {...props}>
+      {children}
+    </nav>
+  );
+}
+
+export default {
+  Root: MainRoot,
+  Main: Main,
+  Content: MainContent,
+  ContentHeader: MainHeader,
+  Sidebar: MainSidebar,
+};

@@ -5,6 +5,7 @@ import AppLayout from './layouts/AppLayout';
 import UserLayout from './layouts/UserLayout';
 import { Routes, Route } from 'react-router-dom';
 import Runner from './components/table/Runner';
+import RunnerPageLayout, {RunnerList} from '@/pages/Runner.tsx';
 
 const LoginPage = lazy(() => import('./pages/Login'));
 const RegisterPage = lazy(() => import('./pages/Register'));
@@ -20,8 +21,9 @@ function App() {
           <Route path='*' element={<>404 page</>} />
         </Route>
         <Route path='/home' element={<UserLayout />}>
-          <Route index element={<>User home page</>} />
-          <Route path='runner' element={<UserLayout />}>
+          <Route index element={<div className='h-[800px] bg-[#2f2f2f] rounded-2xl'>User home page</div>} />
+          <Route path='runners' element={<RunnerPageLayout />}>
+            <Route index element={<RunnerList />} />
             <Route path=':runnerId' element={<UserLayout />}>
               <Route index element={<Runner />} />
               <Route path='tracker/:trackerId' element={<>tracker</>} />
