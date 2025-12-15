@@ -73,7 +73,7 @@ const UserLayout: React.FC<TUserLayoutProps> = (props) => {
   console.log(breadcrumbItems)
 
   return (
-    <div className='h-dvh'>
+    <div className='flex flex-col h-dvh w-full'>
       <header className='h-[73px]'>
         <div className='w-auto h-full flex items-center justify-between px-[19px] md:px-[26px]'>
           <GetTrackedLogo height='35' />
@@ -85,7 +85,7 @@ const UserLayout: React.FC<TUserLayoutProps> = (props) => {
           </div>
         </div>
       </header>
-      <main className='h-[calc(100%-73px)] relative'>
+      <main className='h-[calc(100%-73px)] w-full relative'>
         <SidebarProvider open={isMenuOpened} onOpenChange={setIsMenuOpened}>
           <Main.Root>
             {!isMobile && <DesktopSidebar />}

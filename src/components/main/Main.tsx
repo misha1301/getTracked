@@ -7,7 +7,7 @@ function MainRoot({ children, className, ...props }: React.ComponentProps<'div'>
   return (
     <div
       className={cn(
-        'w-full h-full bg-(--color-component-background) overflow-hidden rounded-t-[20px] flex grow border-solid border-t-(length:--border-width) border-(--border-color)',
+        'w-full h-full bg-(--color-component-background) overflow-hidden rounded-t-[20px] flex border-solid border-t-(length:--border-width) border-(--border-color)',
         className,
       )}
       {...props}
@@ -19,7 +19,7 @@ function MainRoot({ children, className, ...props }: React.ComponentProps<'div'>
 
 function Main({ children, className, ...props }: React.ComponentProps<'main'>) {
   return (
-    <main className={cn('h-full grow flex flex-col', className)} {...props}>
+    <main className={cn('h-full grow w-full flex flex-col ', className)} {...props}>
       {children}
     </main>
   );
@@ -48,7 +48,7 @@ function MainHeader({ children, className, ...props }: React.ComponentProps<'hea
   return (
     <header
       className={cn(
-        'flex shrink-0 items-center w-full h-[48px] px-[10px] md:px-[25px] border-b-(length:--border-width) sm:border-none border-(--border-color) border-solid',
+        'flex shrink-0 items-center w-full h-[48px] px-[10px] md:px-[25px] border-b-(length:--border-width) z-20  border-(--border-color) border-solid',
         className,
       )}
       {...props}
