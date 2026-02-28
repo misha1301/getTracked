@@ -18,15 +18,15 @@ type TrackerStatus = {
   name: string;
 };
 
-type Tracker = {
-  trackableItemId: 1;
+export type Tracker = {
+  trackableItemId: number;
   title: string;
   description: string;
   webUrl: string;
   isPaginable: boolean;
   paginationDelectionKey: string;
-  pagesNumber: 'PagesNumber';
-  lastUpdateDate: typeof Date;
+  pagesNumber: number;
+  lastUpdateDate: string;
   lastErrorMessage: null;
   status: TrackerStatus;
   ruleId: number;

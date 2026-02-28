@@ -66,6 +66,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { Tracker } from '@/db/schema';
+import { tableTrackersDataSet } from '@/db/dataSample';
+
 const frameworks = [
   {
     value: "next.js",
@@ -94,6 +97,8 @@ interface DataTableProps<TData> extends React.ComponentProps<'div'> {
   actionBar?: React.ReactNode;
 }
 
+
+
 const RunnerPageLayout: React.FC = () => {
   return (
     <>
@@ -111,42 +116,48 @@ export function DataTable<TData>({
 }: DataTableProps<TData>) {
 
   return (
-    <div className={cn('flex w-full flex-col overflow-auto', className)} {...props}>
-      <Table>
-        <TableHeader>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <TableHead key={header.id} colSpan={header.colSpan}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(header.column.columnDef.header, header.getContext())}
-                </TableHead>
-              ))}
-            </TableRow>
-          ))}
-        </TableHeader>
-        <TableBody>
-          {table.getRowModel().rows?.length ? (
-            table.getRowModel().rows.map((rowModel) => (
-              <TableRow key={rowModel.id} data-state={rowModel.getIsSelected() && 'selected'}>
-                {rowModel.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </TableCell>
+    <section className={cn('flex w-full flex-col overflow-hidden [--data-table-head-height:40px] [--data-table-padding:5px] [--data-table-header-px:13px] [--data-table-body-rounded:13px] [--data-table-bg:#1e1e1e] [--data-table-cell-bg:#181818]', className)} {...props}>
+      <div className="relative before:absolute before:left-0 before:top-0 before:z-1 before:h-(--data-table-head-height) before:w-(--data-table-header-px) before:bg-linear-to-r before:from-(--data-table-bg) before:to-transparent after:absolute after:right-0 after:top-0 after:z-1 after:h-(--data-table-head-height) after:w-(--data-table-header-px) after:bg-linear-to-l after:from-(--data-table-bg) after:to-transparent">
+        <div className="after:absolute after:inset-0 after:top-(--data-table-head-height) after:bg-(--data-table-cell-bg) after:left-[calc(var(--data-table-padding)*1)] after:right-[calc(var(--data-table-padding)*1)] after:z-[-1] after:rounded-(--data-table-body-rounded)">
+          <div className='overflow-hidden rounded-(--data-table-body-rounded) before:pointer-events-none before:absolute before:inset-0 before:top-(--data-table-head-height) before:left-[calc(var(--data-table-padding)*1)]  before:right-[calc(var(--data-table-padding)*1)] before:z-1 before:rounded-(--data-table-body-rounded) before:ring-[calc(var(--data-table-padding)+5px)] before:ring-(--data-table-bg) after:pointer-events-none after:absolute after:inset-0 after:top-(--data-table-head-height) after:left-[calc(var(--data-table-padding)*1)] after:right-[calc(var(--data-table-padding)*1)] after:z-2 after:rounded-(--data-table-body-rounded) after:bg-clip-padding after:shadow-[0px_0px_5px_1px_rgba(47,_47,_47,_0.25)]'>
+
+            <Table className='z-2'>
+              <TableHeader className='[&_tr]:border-0 bg-(--data-table-bg)'>
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <TableRow key={headerGroup.id}>
+                    {headerGroup.headers.map((header) => (
+                      <TableHead key={header.id} colSpan={header.colSpan} className='font-[montserrat] font-normal text-(--gtr-color-muted-foreground)'>
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(header.column.columnDef.header, header.getContext())}
+                      </TableHead>
+                    ))}
+                  </TableRow>
                 ))}
-              </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell colSpan={table.getAllColumns().length} className='h-24 text-center'>
-                No results.
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
-    </div>
+              </TableHeader>
+              <TableBody className='relative border-(--data-table-bg)  rounded-(--data-table-body-rounded)'>
+                {table.getRowModel().rows?.length ? (
+                  table.getRowModel().rows.map((rowModel) => (
+                    <TableRow key={rowModel.id} data-state={rowModel.getIsSelected() && 'selected'} className=''>
+                      {rowModel.getVisibleCells().map((cell) => (
+                        <TableCell key={cell.id} >
+                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell colSpan={table.getAllColumns().length} className='h-24 text-center'>
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -184,26 +195,44 @@ export const payments: Payment[] = [
   },
 ];
 
-export const columns: ColumnDef<Payment>[] = [
-  {
-    accessorKey: 'id',
-    header: 'ID',
-  },
-  {
-    accessorKey: 'status',
-    header: 'Status',
-  },
-  {
-    accessorKey: 'email',
-    header: 'Email',
-  },
-  {
-    accessorKey: 'amount',
-    header: 'Amount',
-  },
+const columnHelper = createColumnHelper<Tracker>();
+
+export const columns = [
+  columnHelper.accessor("title", {
+    header: "Tracker",
+    cell: (info) => info.getValue(),
+  }),
+  columnHelper.accessor("description", {
+    header: "Description",
+    cell: (info) => info.getValue(),
+  }),
+  columnHelper.accessor("status.name", {
+    header: "Status",
+    cell: (info) => info.getValue(),
+  }),
+  columnHelper.accessor("webUrl", {
+    header: "Web URL",
+    cell: (info) => info.getValue(),
+  }),
+  columnHelper.accessor("resultSetNumber", {
+    header: "Result set",
+    cell: (info) => info.getValue(),
+  }),
+  columnHelper.accessor("lastUpdateDate", {
+    header: "Last update",
+    cell: (info) => info.getValue(),
+  }),
 ];
 
 export const RunnerList = () => {
+
+  const [data, _setData] = React.useState(() => tableTrackersDataSet)
+
+  const table = useReactTable({
+    data,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+  })
 
   const [open, setOpen] = React.useState(false)
   const [value, setValue] = React.useState("")
@@ -221,7 +250,7 @@ export const RunnerList = () => {
       <ContentBoard>
         <BoardHeader className='px-[2px_10px]'>
           <HeaderIcon>
-            <StatusIndicator type={IndicatorStatus.Active} />{' '}
+            <StatusIndicator type={IndicatorStatus.Active} />
           </HeaderIcon>
           <h3 className='text-[17px] font-semibold'>Runner setting</h3>
         </BoardHeader>
@@ -391,8 +420,26 @@ export const RunnerList = () => {
           </LogicBox>
         </BoardContent>
       </ContentBoard>
+
+      <ContentSection>
+        <SectionTitle>
+          <h3 className='text-[17px] font-semibold'>Trackers list</h3>{' '}
+        </SectionTitle>
+        <SectionUtils></SectionUtils>
+      </ContentSection>
+
+      <ContentBoard>
+        <BoardContent>
+          <LogicBox>
+            <LogicBoxLabel muted className='mt-[8px]'>Trackers view</LogicBoxLabel>
+            <DataTable table={table} />
+
+          </LogicBox>
+        </BoardContent>
+      </ContentBoard>
     </ContentFrame>
   );
 };
+
 
 export default RunnerPageLayout;

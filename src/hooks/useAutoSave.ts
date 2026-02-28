@@ -5,7 +5,7 @@ interface IAutoSave<T> {
   initialValue: T;
 }
 
-type TGetItem<T> = ()  => T | null;
+type TGetItem<T> = ()  => T | null | undefined;
 type TSetItem<T> = (value: T) => void;
 type TRemoveItem = () => void;
 
@@ -21,7 +21,7 @@ const useAutoSave = <T>({ store, initialValue }: IAutoSave<T>): TUseAutoSave<T> 
 
   const getSavedItem = (): T => {
     const savedValue = store.getItem();
-    if (savedValue !== null) return savedValue;
+    if (savedValue && savedValue !== null) return savedValue;
 
     if (initialValue instanceof Function) return initialValue();
     return initialValue;
