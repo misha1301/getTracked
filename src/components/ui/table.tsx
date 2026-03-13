@@ -2,7 +2,6 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 
 
 // function Table({ className, ...props }: React.ComponentProps<"table">) {
@@ -22,19 +21,11 @@ import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 
 function Table({ className, ...props }: React.ComponentProps<"table">) {
   return (
-    <ScrollArea
-      className={cn(
-        'relative px-[6px] h-[300px] w-full scroll-smooth bg-(--data-table-bg) whitespace-nowrap'
-      )}
-      type = "auto"
-    >
       <table
         data-slot="table"
         className={cn("w-full caption-bottom text-sm ", className)}
         {...props}
       />
-      <ScrollBar orientation='horizontal' style={{bottom: "5px"}} className=''></ScrollBar>
-    </ScrollArea>
   )
 }
 
