@@ -24,7 +24,8 @@
     "items": {
       "runner": "Runner",
       "rules": "Rules",
-      "settings": "Settings"
+      "settings": "Settings",
+      "notifications": "Notifications"
     }
   }
 }

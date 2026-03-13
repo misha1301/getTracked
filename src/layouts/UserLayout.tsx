@@ -25,22 +25,14 @@ import {
 import { Button } from '@/components/ui/button';
 
 import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarGroup,
-  SidebarHeader,
   SidebarProvider,
-  SidebarTrigger,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarMenuBadge,
+  SidebarTrigger
 } from '@/components/ui/sidebar';
 
 import SvgWrapper from '@/components/wrappers/SvgWrapper.tsx';
 import NavBreadcrumb, { TBreadcrumbItem } from '@/components/navigation/NavBreadcrumb.tsx';
 import useBreadcrumbs from 'use-react-router-breadcrumbs';
+import { sidebarMenuLinks } from '@/configs/menuLinks.tsx';
 
 type TUserLayoutProps = {
   footer?: React.ReactNode | undefined;
@@ -86,9 +78,9 @@ const UserLayout: React.FC<TUserLayoutProps> = (props) => {
         </div>
       </header>
       <main className='h-[calc(100%-73px)] w-full relative'>
-        <SidebarProvider open={isMenuOpened} onOpenChange={setIsMenuOpened}>
+        <SidebarProvider open={isMenuOpened}  onOpenChange={setIsMenuOpened}>
           <Main.Root>
-            {!isMobile && <DesktopSidebar />}
+            {!isMobile && <DesktopSidebar sideBarData={sidebarMenuLinks} />}
             <Main.Main>
               <Main.ContentHeader>
                 {isMobile ? (

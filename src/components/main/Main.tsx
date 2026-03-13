@@ -1,6 +1,5 @@
 import React from 'react';
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
-import { Root as ScrollAreaRoot } from '@radix-ui/react-scroll-area';
+import { ScrollAreaFlex, ScrollBar } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils.ts';
 
 function MainRoot({ children, className, ...props }: React.ComponentProps<'div'>) {
@@ -19,7 +18,7 @@ function MainRoot({ children, className, ...props }: React.ComponentProps<'div'>
 
 function Main({ children, className, ...props }: React.ComponentProps<'main'>) {
   return (
-    <main className={cn('h-full grow w-full flex flex-col ', className)} {...props}>
+    <main className={cn('h-full grow w-5 flex flex-col ', className)} {...props}>
       {children}
     </main>
   );
@@ -29,18 +28,19 @@ function MainContent({
   children,
   className,
   ...props
-}: React.ComponentProps<typeof ScrollAreaRoot>) {
+}: React.ComponentProps<typeof ScrollAreaFlex>) {
   return (
-    <ScrollArea
+    <ScrollAreaFlex
       className={cn(
         'min-h-0 w-full grow flex flex-col scroll-smooth bg-(--color-component-background)',
         className,
       )}
       {...props}
+      viewportClassName="p-[10px] md:p-[24px]"
     >
       {children}
       <ScrollBar orientation='vertical' className='w-[7px] md:w-[10px] mr-[2px] md:mr-[5px]'></ScrollBar>
-    </ScrollArea>
+    </ScrollAreaFlex>
   );
 }
 

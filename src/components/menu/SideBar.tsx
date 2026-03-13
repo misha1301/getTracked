@@ -8,17 +8,12 @@ import {
   SidebarTrigger,
 } from '@/components/ui/sidebar.tsx';
 
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-
 import { SidebarLink } from '@/components/ui/link.tsx';
 import { useTranslation } from 'react-i18next';
-import { sidebarMenuLinks, menuItem } from '@/configs/menuLinks.tsx';
-import { useSidebar } from '@/components/ui/sidebar';
+import { sidebarMenuItems } from '@/configs/menuLinks.tsx';
 
-function DesktopSidebar() {
+function DesktopSidebar({sideBarData}: {sideBarData: sidebarMenuItems}){
   const { t } = useTranslation();
-
-  const { state, open, setOpen, openMobile, setOpenMobile, isMobile, toggleSidebar } = useSidebar();
 
   return (
     <Sidebar variant='sidebar'>
@@ -27,7 +22,7 @@ function DesktopSidebar() {
       </SidebarHeader>
       <SidebarContent className='p-[15px]'>
         <SidebarMenu>
-          {sidebarMenuLinks.mainItems.map((menuItem: menuItem) => (
+          {sideBarData.mainItems.map((menuItem) => (
             <SidebarMenuItem key={t(menuItem.titleKey)}>
               <SidebarLink
                 key={menuItem.key}
@@ -35,7 +30,7 @@ function DesktopSidebar() {
                 className='gap-[8px] group-data-[collapsible=icon]:px-[6px]'
               >
                 {typeof menuItem.icon === 'function' ? menuItem.icon({}) : null}
-                <span className='group-data-[collapsible=icon]:overflow-hidden'>
+                <span className='group-data-[collapsible=icon]:overflow-hidden truncate'>
                   {t(menuItem.titleKey)}
                 </span>
               </SidebarLink>
@@ -44,14 +39,14 @@ function DesktopSidebar() {
         </SidebarMenu>
       </SidebarContent>
       <SidebarFooter className='p-[15px]'>
-        {sidebarMenuLinks.footerItems.map((menuItem: menuItem) => (
+        {sideBarData.footerItems.map((menuItem) => (
           <SidebarLink
             key={menuItem.key}
             to={menuItem.urlTo}
             className='gap-[8px] group-data-[collapsible=icon]:p-[6px]'
           >
             {typeof menuItem.icon === 'function' ? menuItem.icon({}) : null}
-            <span className='group-data-[collapsible=icon]:overflow-hidden'>
+            <span className='group-data-[collapsible=icon]:overflow-hidden truncate'>
               {t(menuItem.titleKey)}
             </span>
           </SidebarLink>

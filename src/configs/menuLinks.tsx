@@ -1,10 +1,14 @@
 import { Code2, Container, LucideProps, Settings } from 'lucide-react';
+import { JSX } from 'react';
 
 enum SIDEBAR_MENU_KEYS {
   RUNNERS = 'runners',
   RULES = 'rules',
+  NOTIFICATIONS = 'notifications',
   SETTINGS = 'settings',
-}
+} 
+
+type IconKey = (typeof SIDEBAR_MENU_KEYS)[keyof typeof SIDEBAR_MENU_KEYS];
 
 export type TNavLinkItem = {
   key: string;
@@ -22,11 +26,16 @@ export type sidebarMenuItems = {
 };
 
 const iconMap: Record<IconKey, (props: LucideProps) => JSX.Element> = {
-  runners: (props) => (
+  [SIDEBAR_MENU_KEYS.RUNNERS]: (props) => (
     <Container height='22px' strokeWidth={1.25} className=' shrink-0' {...props} />
   ),
-  rules: (props) => <Code2 height='22px' strokeWidth={1.25} className=' shrink-0' {...props} />,
-  settings: (props) => (
+  [SIDEBAR_MENU_KEYS.RULES]: (props) => ( 
+    <Code2 height='22px' strokeWidth={1.25} className=' shrink-0' {...props} />
+  ),
+    [SIDEBAR_MENU_KEYS.SETTINGS]: (props) => (
+    <Settings height='22px' strokeWidth={1.25} className='shrink-0' {...props} />
+  ),
+  [SIDEBAR_MENU_KEYS.NOTIFICATIONS]: (props) => (
     <Settings height='22px' strokeWidth={1.25} className='shrink-0' {...props} />
   ),
 };
@@ -49,6 +58,13 @@ export const sidebarMenuLinks: sidebarMenuItems = {
       urlTo: '/home/rules',
       icon: getIcon(SIDEBAR_MENU_KEYS.RULES),
     },
+
+    {
+      key: SIDEBAR_MENU_KEYS.NOTIFICATIONS,
+      titleKey: 'menu.items.notifications',
+      urlTo: '/home/notifications',
+      icon: getIcon(SIDEBAR_MENU_KEYS.NOTIFICATIONS),
+    },
   ],
   footerItems: [
     {
@@ -60,6 +76,6 @@ export const sidebarMenuLinks: sidebarMenuItems = {
   ],
 };
 
-type IconKey = (typeof SIDEBAR_MENU_KEYS)[keyof typeof SIDEBAR_MENU_KEYS];
+
 
 

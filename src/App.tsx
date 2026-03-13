@@ -7,6 +7,7 @@ import { Routes, Route } from 'react-router-dom';
 import Runner from './components/table/Runner';
 import RunnerPageLayout, {RunnerList} from '@/pages/Runner.tsx';
 import RulesPageLayout, {RulesList} from '@/pages/RulesPage.tsx';
+import NotFoundPage from './pages/empty/NotFound.tsx';
 
 const LoginPage = lazy(() => import('./pages/Login'));
 const RegisterPage = lazy(() => import('./pages/Register'));
@@ -38,7 +39,7 @@ function App() {
               <Route index element={<RulesList />} />
             </Route>
           </Route>
-          <Route path='*' element={<>404 page</>} />
+          <Route path='*' element={<NotFoundPage/>} />
         </Route>
       </Routes>
     </AppLayout>
