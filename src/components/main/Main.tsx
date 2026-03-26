@@ -36,7 +36,7 @@ function MainContent({
         className,
       )}
       {...props}
-      viewportClassName="p-[10px] md:p-[24px]"
+      viewportClassName="p-[10px] md:p-[24px] [&>div]:grow [&>div]:flex [&>div]:flex-col flex flex-col"
     >
       {children}
       <ScrollBar orientation='vertical' className='w-[7px] md:w-[10px] mr-[2px] md:mr-[5px]'></ScrollBar>

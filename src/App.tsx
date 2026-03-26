@@ -4,7 +4,6 @@ import ClientLayout from './layouts/ClientLayout';
 import AppLayout from './layouts/AppLayout';
 import UserLayout from './layouts/UserLayout';
 import { Routes, Route } from 'react-router-dom';
-import Runner from './components/table/Runner';
 import RunnerPageLayout, {RunnerList} from '@/pages/Runner.tsx';
 import RulesPageLayout, {RulesList} from '@/pages/RulesPage.tsx';
 import NotFoundPage from './pages/empty/NotFound.tsx';
@@ -12,7 +11,6 @@ import NotFoundPage from './pages/empty/NotFound.tsx';
 const LoginPage = lazy(() => import('./pages/Login'));
 const RegisterPage = lazy(() => import('./pages/Register'));
 const RulesPage = lazy(()=> import('./pages/RulesPage.tsx'))
-
 
 function App() {
   return (
@@ -29,7 +27,7 @@ function App() {
           <Route path='runners' element={<RunnerPageLayout />}>
             <Route index element={<RunnerList />} />
             <Route path=':runnerId' element={<UserLayout />}>
-              <Route index element={<Runner />} />
+              <Route index element={<RunnerList />} />
               <Route path='tracker/:trackerId' element={<>tracker</>} />
             </Route>
           </Route>

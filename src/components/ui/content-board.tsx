@@ -33,9 +33,9 @@ const ContentBoard: React.FC<TDivProps> = (props) => {
 const ContentSection: React.FC<TDivProps> = (props) => {
   const {children, className, ...rest} = props
   return(
-    <div className={cn("w-full grid grid-cols-2 px-[15px] my-[14px] has-only:grid-cols-1", className)} {...rest}>
+    <div className={cn("w-full grid grid-cols-2 px-[15px] my-[14px] [&:has(>:only-child)]:grid-cols-1", className)} {...rest}>
       {children}
-    </div>
+    </div>  
   )
 }
 

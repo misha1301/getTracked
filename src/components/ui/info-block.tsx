@@ -8,7 +8,7 @@ const InfoBlock: React.FC<TContentBoardProps> = (props) => {
   return (
     <div
       className={cn(
-        'flex flex-col w-full bg-[#181818] rounded-[11px] shadow-[0px_0px_5px_1px_rgba(47,_47,_47,_0.25)] overflow-hidden' +
+        'flex flex-col w-full bg-[#181818] rounded-[11px] shadow-foreground overflow-hidden' +
         'border-[#1E1E1E] *:data-text-info:border-b-[0.5px] *:data-text-info:last:border-none *:data-text-info:only:border-none ',
         className,
       )}

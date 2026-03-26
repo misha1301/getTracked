@@ -2,8 +2,7 @@ import React from 'react';
 
 import { Outlet } from 'react-router-dom';
 
-import { Check, ChevronsUpDown } from "lucide-react";
-
+import { Textarea } from '@/components/ui/textarea';
 import {
   ContentFrame,
   ContentBoard,
@@ -22,46 +21,29 @@ import {
 import { InfoBlock, InfoRow, RowBadgeContainer } from '@/components/ui/info-block.tsx';
 import { Badge } from '@/components/ui/badge.tsx';
 
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination"
 
 import { Button } from '@/components/ui/button.tsx';
 
 
-const frameworks = [
-  {
-    id: "jdfhlfeiauhuifhuhr371",
-    value: "Rule 1",
-    label: "Description of rule 1",
-  },{
-    id: "jdfhlfeiauhuifhuhr372",
-    value: "Rule 2",
-    label: "Description of rule 2",
-  },{
-    id: "jdfhlfeiauhuifhuhr373",
-    value: "Rule 3",
-    label: "Description of rule 3",
-  },{
-    id: "jdfhlfeiauhuifhuhr374",
-    value: "Rule 4",
-    label: "Description of rule 4",
-  },{
-    id: "jdfhlfeiauhuifhuhr375",
-    value: "Rule 5",
-    label: "Description of rule 5",
-  },{
-    id: "jdfhlfeiauhuifhuhr376",
-    value: "Rule 6",
-    label: "Description of rule 6",
+import { JsonTextarea } from "../components/textArea";
+
+import { InputCustom } from '@/components/inputs/input';
+import { IndicatorStatus, StatusIndicator } from '@/components/ui/statusIndicator';
+
+const EXAMPLE_DATA = {
+  user: {
+    id: "usr_01HXYZ",
+    name: "Ada Lovelace",
+    email: "ada@example.com",
+    roles: ["admin", "editor"],
+    metadata: {
+      created_at: "2024-01-15T08:30:00Z",
+      last_login: "2025-03-14T22:11:44Z",
+      preferences: { theme: "dark", language: "en", notifications: true },
+    },
   },
-]
+  pagination: { page: 1, per_page: 25, total: 1042 },
+};
 
 const RulesPageLayout: React.FC = () => {
   return (
@@ -73,24 +55,34 @@ const RulesPageLayout: React.FC = () => {
 
 export const RulesList = () => {
 
+  const [open, setOpen] = React.useState(false)
+  const [value, setValue] = React.useState("")
+  const [editValue, setEditValue] = React.useState<string | object>(EXAMPLE_DATA);
+
   return (
     <ContentFrame maxFrameWidth='1200px'>
       <ContentSection>
         <SectionUtils>
-          <Button variant='link' size='none' className='text-(--gtr-color-warning-foreground)'>
-            Edit tracker
+          <Button variant='link' size='none' className='text-(--gtr-color-link-active)'>
+            + Add rule
           </Button>
         </SectionUtils>
       </ContentSection>
 
       <ContentBoard>
+        <BoardHeader className='p-0'>
+          <ContentSection className='my-0 px-0'>
+            <SectionTitle >
+              <LogicBoxLabel muted className='mt-[8px]'>Total number</LogicBoxLabel>
+              <LogicBoxLabel muted className='mt-[8px]'>Per page</LogicBoxLabel>
+            </SectionTitle>
+          </ContentSection>
+        </BoardHeader>
         <BoardContent>
           <LogicBox>
-            <LogicBoxLabel muted className='mt-[8px]'>Total number</LogicBoxLabel>
             <InfoBlock>
               <InfoRow>
-
-                gege
+                <LogicBoxLabel muted className='mt-[8px]'>Total number <span>6</span></LogicBoxLabel>
                 <RowBadgeContainer>
                   <Badge
                     className='h-5 min-w-5 rounded-full px-1 font-mono tabular-nums'
@@ -107,40 +99,19 @@ export const RulesList = () => {
         </BoardContent>
       </ContentBoard>
 
-      <ContentSection>
-        <SectionTitle>
-          <Pagination>
-            <PaginationContent>
-              <PaginationItem>
-                <PaginationPrevious href="#" />
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#">1</PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#" isActive>
-                  2
-                </PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#">3</PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationEllipsis />
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#">10</PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationNext href="#" />
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination>
-        </SectionTitle>
-      </ContentSection>
-
+      <ContentBoard>
+        <BoardContent>
+          <LogicBox aria-invalid="false" className='group'>
+            {/* <TextAreaBadge>JSON</TextAreaBadge> */}
+            <JsonTextarea value={EXAMPLE_DATA} maxHeight={300} />
+            <ErrorLabel>Недопустиме значення електронної адреси!</ErrorLabel>
+          </LogicBox>
+        </BoardContent>
+        <BoardFooter>Last updated / 13.11.2024</BoardFooter>
+      </ContentBoard>
     </ContentFrame>
   );
 };
+
 
 export default RulesPageLayout;

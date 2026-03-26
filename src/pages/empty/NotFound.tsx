@@ -14,29 +14,23 @@ import {
   SectionUtils,
 } from '@/components/ui/content-board.tsx';
 import { InfoBlock, InfoRow, RowBadgeContainer } from '@/components/ui/info-block.tsx';
-import { Badge } from '@/components/ui/badge.tsx';
 
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination"
+import { useNavigate } from "react-router-dom"
 
 import { Button } from '@/components/ui/button.tsx';
+import { NavLink } from 'react-router-dom';
 
 
 
 export const NotFoundPage = () => {
 
+  const navigation = useNavigate();
+  
   return (
     <ContentFrame maxFrameWidth='1200px'>
       <ContentSection>
         <SectionUtils>
-          <Button variant='link' size='none' className='text-(--gtr-color-warning-foreground)'>
+          <Button onClick={() => navigation(-1)} variant='link' size='none' className='text-(--gtr-color-warning-foreground)'>
             Go back
           </Button>
         </SectionUtils>
@@ -48,16 +42,7 @@ export const NotFoundPage = () => {
             <LogicBoxLabel muted className='mt-[8px]'>Not found</LogicBoxLabel>
             <InfoBlock>
               <InfoRow>
-
-                gege
-                <RowBadgeContainer>
-                  <Badge
-                    className='h-5 min-w-5 rounded-full px-1 font-mono tabular-nums'
-                    variant='destructive'
-                  >
-                    deleted
-                  </Badge>
-                </RowBadgeContainer>
+                
               </InfoRow>
             </InfoBlock>
           </LogicBox>
